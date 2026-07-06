@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VANDHU · Ticket Routing Agent</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="scanlines" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">◈</span>
+    <div>
+      <h1>VANDHU <span class="brand-dim">/ Ticket Routing Agent</span></h1>
+      <p class="brand-sub">Every ticket, dispatched to the right team automatically.</p>
+    </div>
+  </div>
+  <div class="stat-strip" id="statStrip">
+    <div class="stat"><span class="stat-num" id="statTotal">0</span><span class="stat-label">Total</span></div>
+    <div class="stat"><span class="stat-num" id="statOpen">0</span><span class="stat-label">Open</span></div>
+    <div class="stat"><span class="stat-num" id="statResolved">0</span><span class="stat-label">Resolved</span></div>
+    <div class="stat stat-alert"><span class="stat-num" id="statHigh">0</span><span class="stat-label">High priority</span></div>
+  </div>
+  <div class="user-chip" id="userChip" hidden>
+    <span class="avatar" id="userAvatar">?</span>
+    <span class="user-name" id="userName"></span>
+    <button id="logoutBtn">Log out</button>
+  </div>
+</header>
+
+<main class="layout">
+
+  <section class="panel intake">
+    <h2 class="panel-title">New ticket</h2>
+    <form id="ticketForm" novalidate>
+      <label for="subject">Subject</label>
+      <input type="text" id="subject" name="subject" placeholder="e.g. Payment charged twice" required maxlength="120" />
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="5" placeholder="Describe the issue in the customer's own words — the more detail, the better the routing."></textarea>
+
+      <button type="submit" id="submitBtn">
+        <span class="btn-label">Route ticket</span>
+        <span class="btn-arrow">→</span>
+      </button>
+      <p class="intake-note">Routed instantly by keyword + intent match. No queue, no manual triage.</p>
+    </form>
+  </section>
+
+  <section class="panel rail">
+    <h2 class="panel-title">Routing rail</h2>
+    <div class="rail-track" id="railTrack"></div>
+  </section>
+
+  <section class="panel queue">
+    <div class="queue-head">
+      <h2 class="panel-title">Ticket queue</h2>
+      <div class="queue-filters">
+        <select id="filterTeam"><option value="all">All teams</option></select>
+        <select id="filterStatus">
+          <option value="all">All statuses</option>
+          <option value="Open">Open</option>
+          <option value="Resolved">Resolved</option>
+        </select>
+      </div>
+    </div>
+    <div class="queue-table-wrap">
+      <table class="queue-table">
+        <thead>
+          <tr>
+            <th>Ticket</th>
+            <th>Team</th>
+            <th>Confidence</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="ticketBody"></tbody>
+      </table>
+      <div class="empty-state" id="emptyState" hidden>
+        <p>No tickets match this view.</p>
+        <span>Try a different filter, or submit a new ticket.</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

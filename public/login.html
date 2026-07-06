@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign in · VANDHU</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-body">
+
+<div class="scanlines" aria-hidden="true"></div>
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <span class="brand-mark">◈</span>
+      <div>
+        <h1>VANDHU <span class="brand-dim">/ Ticket Routing Agent</span></h1>
+        <p class="brand-sub">Sign in to view the dispatch queue.</p>
+      </div>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-mode="login">Sign in</button>
+      <button class="auth-tab" data-mode="signup">Create account</button>
+    </div>
+
+    <form id="loginForm" class="auth-form">
+      <label for="loginUsername">Username</label>
+      <input type="text" id="loginUsername" autocomplete="username" required />
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" autocomplete="current-password" required />
+      <button type="submit" id="loginBtn">
+        <span class="btn-label">Sign in</span><span class="btn-arrow">→</span>
+      </button>
+      <p class="auth-hint">Demo login: <strong>admin</strong> / <strong>admin123</strong></p>
+    </form>
+
+    <form id="signupForm" class="auth-form" hidden>
+      <label for="signupName">Full name</label>
+      <input type="text" id="signupName" autocomplete="name" />
+      <label for="signupUsername">Username</label>
+      <input type="text" id="signupUsername" autocomplete="username" required />
+      <label for="signupPassword">Password</label>
+      <input type="password" id="signupPassword" autocomplete="new-password" required minlength="4" />
+      <button type="submit" id="signupBtn">
+        <span class="btn-label">Create account</span><span class="btn-arrow">→</span>
+      </button>
+    </form>
+
+    <p class="auth-error" id="authError" hidden></p>
+  </div>
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>
