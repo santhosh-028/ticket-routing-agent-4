@@ -1,94 +1,156 @@
-# VANDHU — Ticket Routing Agent
+# Smart Ticket Routing System
 
-Rule-based support ticket routing dashboard. A customer/agent submits a ticket
-(subject + description), and the engine automatically classifies it into the
-right team, assigns a priority, and shows a live "routing rail" of open
-tickets per team.
+A web-based **Smart Ticket Routing System** developed using **Node.js**, **Express.js**, **HTML**, **CSS**, and **JavaScript**. The application automatically classifies support tickets, assigns priorities, and routes them to the appropriate support team through a simple dashboard.
 
-## What's inside
+---
+
+## Features
+
+- 🔐 User Login & Signup
+- 🎫 Create Support Tickets
+- 🤖 Automatic Ticket Routing
+- ⚡ Priority Detection (High / Medium / Low)
+- 📊 Dashboard with Team Statistics
+- 🔄 Update Ticket Status
+- 🗑️ Delete Tickets
+- 📈 Live Ticket Queue
+
+---
+
+## Technologies Used
+
+- Node.js
+- Express.js
+- HTML5
+- CSS3
+- JavaScript
+- Express Session
+- bcryptjs
+
+---
+
+## Project Structure
 
 ```
 ticket-routing-agent/
-├── server.js          Express backend + routing engine + REST API
+│
+├── server.js
 ├── package.json
-├── public/
-│   ├── index.html      Dashboard UI
-│   ├── style.css       Control-room styled theme
-│   └── app.js          Frontend logic (fetch calls + rendering)
-└── README.md
+├── package-lock.json
+├── README.md
+│
+└── public/
+    ├── index.html
+    ├── style.css
+    └── app.js
 ```
 
-## Run it
+---
 
-Requires Node.js 18+ (works fine on 20/22 too).
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/YOUR_GITHUB_USERNAME/ticket-routing-agent.git
+```
+
+Go to the project folder:
 
 ```bash
 cd ticket-routing-agent
+```
+
+Install dependencies:
+
+```bash
 npm install
+```
+
+Run the project:
+
+```bash
 npm start
 ```
 
-Then open **http://localhost:3000** in your browser. You'll land on the sign-in
-page first.
+Open your browser:
 
-The server serves both the API and the frontend on the same port, so there's
-nothing else to configure.
+```
+http://localhost:3000
+```
 
-## Login
+---
 
-A demo account is seeded automatically:
+## Login Credentials
 
-- **Username:** `admin`
-- **Password:** `admin123`
+### Demo Account
 
-Or click **Create account** on the sign-in page to register your own
-username/password — new accounts work immediately, no email verification.
+**Username**
 
-Sessions last 8 hours (cookie-based, via `express-session`). Click **Log out**
-in the top-right of the dashboard to end your session — the API refuses all
-ticket requests once logged out, so it's a real guard, not just a UI hide.
+```
+admin
+```
 
-## How routing works
+**Password**
 
-`server.js` has a `classifyTicket()` function that scores the ticket's text
-against keyword sets for each team:
+```
+admin123
+```
 
-- Billing & Payments
-- Technical Support
-- Account & Access
-- Engineering (Bugs)
-- Sales & Pricing
-- Security & Abuse
-- General Support (fallback, when nothing else matches confidently)
+You can also create a new account using the **Sign Up** option.
 
-It also flags **priority** (High / Medium / Low) based on urgency keywords
-("urgent", "asap", "production down", etc.) and message length.
+---
 
-This is intentionally simple and dependency-free so it runs anywhere. To
-upgrade it to an LLM-based classifier later, replace the body of
-`classifyTicket()` in `server.js` with a call to the Claude API (or any other
-model) and keep returning the same `{ team, priority, confidence }` shape —
-the rest of the app doesn't need to change.
+## Project Workflow
 
-## API reference
+1. User logs in.
+2. User creates a support ticket.
+3. The system analyzes the ticket.
+4. Ticket is automatically assigned to the correct team.
+5. Priority is generated.
+6. Dashboard displays live ticket status.
 
-| Method | Route                | Description                          |
-|--------|----------------------|---------------------------------------|
-| POST   | `/api/auth/signup`   | Create an account, auto-signs in     |
-| POST   | `/api/auth/login`    | Sign in with username + password     |
-| POST   | `/api/auth/logout`   | End the session                      |
-| GET    | `/api/auth/me`       | Current signed-in user (401 if none) |
-| GET    | `/api/teams`         | List teams with open ticket counts   |
-| GET    | `/api/tickets`       | List tickets (`?team=`, `?status=`)  |
-| POST   | `/api/tickets`       | Create + auto-route a ticket         |
-| PATCH  | `/api/tickets/:id`   | Update status or reassign team       |
-| DELETE | `/api/tickets/:id`   | Delete a ticket                      |
-| GET    | `/api/stats`         | Totals: open/resolved/high priority  |
+---
 
-## Notes
+## API Endpoints
 
-- Data is stored in memory, so it resets when the server restarts. Swap in a
-  real database (Postgres, SQLite, MongoDB) by replacing the `tickets` array
-  in `server.js` if you need persistence.
-- All buttons (Route ticket, Resolve/Reopen, Delete, filters) are wired to
-  the backend and update the queue live — nothing is a placeholder.
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | /api/auth/signup | Register User |
+| POST | /api/auth/login | Login |
+| POST | /api/auth/logout | Logout |
+| GET | /api/auth/me | Current User |
+| GET | /api/tickets | Get Tickets |
+| POST | /api/tickets | Create Ticket |
+| PATCH | /api/tickets/:id | Update Ticket |
+| DELETE | /api/tickets/:id | Delete Ticket |
+| GET | /api/stats | Dashboard Statistics |
+
+---
+
+## Future Enhancements
+
+- AI-based Ticket Classification
+- Email Notifications
+- Database Integration (MongoDB/MySQL)
+- Admin Dashboard
+- Search & Filter
+- Dark Mode
+- Analytics Charts
+
+---
+
+## Developer
+
+**Santhosh**
+
+GitHub:
+https://github.com/YOUR_GITHUB_USERNAME
+
+---
+
+## License
+
+This project is developed for learning and portfolio purposes.
+
+© 2026 Santhosh. All Rights Reserved.
